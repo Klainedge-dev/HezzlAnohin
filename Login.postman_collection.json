@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "1dadc1d1-4d80-4518-8a96-30a18747f5df",
+		"name": "Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21550640",
+		"_collection_link": "https://restless-meadow-735792.postman.co/workspace/My-Workspace~6811a95a-2671-4bd3-8f85-b53b1f209f7e/collection/21550640-1dadc1d1-4d80-4518-8a96-30a18747f5df?action=share&source=collection_link&creator=21550640"
+	},
+	"item": [
+		{
+			"name": "метод CheckLogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.environment.set(\"accessToken\", pm.response.json().accessToken);\r",
+							"console.log(pm.environment.get(\"accessToken\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"{{email}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}auth/v1/game/:campaignId/check-login",
+					"host": [
+						"{{baseUrl}}auth"
+					],
+					"path": [
+						"v1",
+						"game",
+						":campaignId",
+						"check-login"
+					],
+					"variable": [
+						{
+							"key": "campaignId",
+							"value": "{{campaignId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Метод ConfirmCode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{accessToken}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}auth/v1/game/:campaignId/confirm-code",
+					"host": [
+						"{{baseUrl}}auth"
+					],
+					"path": [
+						"v1",
+						"game",
+						":campaignId",
+						"confirm-code"
+					],
+					"variable": [
+						{
+							"key": "campaignId",
+							"value": "{{campaignId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

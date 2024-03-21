@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "412a524a-5b06-4bb9-af47-81830057bac3",
+		"name": "Init",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21550640",
+		"_collection_link": "https://restless-meadow-735792.postman.co/workspace/My-Workspace~6811a95a-2671-4bd3-8f85-b53b1f209f7e/collection/21550640-412a524a-5b06-4bb9-af47-81830057bac3?action=share&source=collection_link&creator=21550640"
+	},
+	"item": [
+		{
+			"name": "Метод Init",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"timeZone\", pm.response.json().time);\r",
+							"console.log(pm.response.json().time);\r",
+							"\r",
+							"pm.test(\"Response has the required field 'data'\", function () {\r",
+							"  pm.expect(pm.response.json().data).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has the required field 'auth'\", function () {\r",
+							"  pm.expect(pm.response.json().data.auth).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/gw/v1/game/:campaignId/init",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"gw",
+						"v1",
+						"game",
+						":campaignId",
+						"init"
+					],
+					"variable": [
+						{
+							"key": "campaignId",
+							"value": "{{campaignId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "AdminToken",
+			"value": ""
+		}
+	]
+}
